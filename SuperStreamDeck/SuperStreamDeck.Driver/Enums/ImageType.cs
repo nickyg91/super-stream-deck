@@ -1,4 +1,4 @@
-namespace StreamDeck.Driver.Enums;
+namespace SuperStreamDeck.Driver.Enums;
 
 public enum ImageType : byte
 {

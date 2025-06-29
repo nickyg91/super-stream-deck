@@ -24,9 +24,10 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\StreamDeck.Driver\StreamDeck.Driver.csproj" />
+      <ProjectReference Include="..\SuperStreamDeck.Driver\SuperStreamDeck.Driver.csproj" />
     </ItemGroup>
 </Project>

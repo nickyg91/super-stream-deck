@@ -1,8 +1,8 @@
-namespace StreamDeck.Driver.Enums;
+namespace SuperStreamDeck.Driver.Enums;
 
 public enum StreamDeckType
 {
-    OriginalSteamDeck = 0x0060,
+    OriginalStreamDeck = 0x0060,
     OriginalStreamDeckV2 = 0x006d,
     StreamDeckMini = 0x0063,
     StreamDeckNeo = 0x009a,
