@@ -1,4 +1,3 @@
-
 using LibUsbDotNet.LibUsb;
 using SuperStreamDeck.Driver.Devices.Base;
 using SuperStreamDeck.Driver.Enums;
@@ -16,15 +15,19 @@ public class DeviceManager : IDeviceManager, IDisposable
 
     public List<StreamDeck> GetConnectedStreamDeckDevices()
     {
-        var streamDecks = new List<Base.StreamDeck>();
-        var devices = _context.List().Where(x => x.VendorId == ELGATO_VID).ToList();
+        var streamDecks = new List<StreamDeck>();
+        var devices = _context
+            .List()
+            .Where(x => x.VendorId == ELGATO_VID)
+            .ToList();
+        
         foreach (var device in devices)
         {
             switch ((StreamDeckType)device.ProductId)
             {
                 case StreamDeckType.OriginalStreamDeck:
                 case StreamDeckType.OriginalStreamDeckV2:
-                    streamDecks.Add(new StreamDeckV2(device));
+                    streamDecks.Add(new StreamDeckV2(device as UsbDevice));
                     break;
                 case StreamDeckType.StreamDeckMini:
                 case StreamDeckType.StreamDeckNeo:

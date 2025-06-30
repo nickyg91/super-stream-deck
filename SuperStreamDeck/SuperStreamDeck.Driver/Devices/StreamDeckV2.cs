@@ -8,13 +8,22 @@ namespace SuperStreamDeck.Driver.Devices;
 
 public class StreamDeckV2 : Base.StreamDeck, IDisposable
 {
-    private readonly IUsbDevice _device;
     private readonly UsbEndpointReader _reader;
     private readonly UsbEndpointWriter _writer;
     
-    public StreamDeckV2(IUsbDevice device) : base(15, 72, 72, 3, 5, [ImageType.PNG, ImageType.JPEG, ImageType.GIF])
+    public StreamDeckV2(UsbDevice? device) : base(15, 72, 72, 3, 5, [ImageType.PNG, ImageType.JPEG, ImageType.GIF])
     {
-        _device = device;
+        if (device == null)
+        {
+            throw new ArgumentNullException(nameof(device), "Device cannot be null");
+        }
+        device.Open();
+        var interfaceNumber = device.Configs[0].Interfaces[0].Number;
+        if (device.IsKernelDriverActive(interfaceNumber))
+        {
+            device.DetachKernelDriver(interfaceNumber);
+        }
+        device.ClaimInterface(interfaceNumber);
         _reader = device.OpenEndpointReader(ReadEndpointID.Ep01);
         _writer = device.OpenEndpointWriter(WriteEndpointID.Ep01);
         Task.Run(async () => await OpenReadStream());
@@ -38,16 +47,22 @@ public class StreamDeckV2 : Base.StreamDeck, IDisposable
     
     private async Task OpenReadStream()
     {
-        var buffer = new byte[64];
         while (true)
         {
-            var result = await _reader.ReadAsync(buffer, 1000);
-            Console.WriteLine(System.Text.Encoding.UTF8.GetString(buffer));
+            var buffer = new byte[512];
+            var result = await _reader.ReadAsync(buffer, 0, 512, 12000);
+            // slice off first four bytes
+            // take next 15 items (each index is a key)
+            var segment = new ArraySegment<byte>(buffer, 4, 15);
             if (result.error != Error.Success)
             {
-                throw new Exception($"Error reading data: {result.error}");
+                continue;
             }
-            // Process the data in buffer
+            var buttonPressedIndex = Array.IndexOf(segment.Array!, (byte)1, segment.Offset, segment.Count);
+            if (buttonPressedIndex > 0)
+            {
+                Console.WriteLine($"Button Pressed: {buttonPressedIndex - segment.Offset + 1}");
+            }
         }
     }
     
