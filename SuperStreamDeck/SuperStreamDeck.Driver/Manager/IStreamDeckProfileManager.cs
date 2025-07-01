@@ -11,5 +11,5 @@ public interface IStreamDeckProfileManager
     public void AddProfile(Profile profile);
     public void UpdateProfile(Profile profile);
     public void DeleteProfile(Guid id);
-    public Task SetDeckProfile(Profile profile, IMacroBoard streamDeck);
+    public void SetDeckProfile(Profile profile, IMacroBoard streamDeck);
 }

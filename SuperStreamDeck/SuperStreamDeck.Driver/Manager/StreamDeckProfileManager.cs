@@ -47,7 +47,7 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
         }
     }
 
-    public async Task SetDeckProfile(Profile profile, IMacroBoard streamDeck)
+    public void SetDeckProfile(Profile profile, IMacroBoard streamDeck)
     {
         if (!streamDeck.IsConnected)
         {
@@ -62,19 +62,13 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
                 continue;
             }
 
-            if (!string.IsNullOrEmpty(keySetting.Text))
+            if (string.IsNullOrEmpty(keySetting.Text))
             {
-                streamDeck.SetKeyBitmap(i);
+                continue;
             }
+            var bmp = CreateKeyBitmapFromText(keySetting.Text);
+            streamDeck.SetKeyBitmap(bmp);
         }
-        // foreach (var key in profile.Keys)
-        // {
-        //     var keyId = streamDeck.Keys;
-        //     if (keyId != null)
-        //     {
-        //        
-        //     }
-        // }
     }
 
     private KeyBitmap CreateKeyBitmapFromText(
@@ -96,14 +90,15 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
         img.Mutate(ctx =>
         {
             ctx.Clear(bgColor.Value);
-            var textOptions = new TextOptions(fontObj)
+            var textOptions = new RichTextOptions(fontObj)
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 Origin = new PointF(keySize / 2f, keySize / 2f),
-                WrappingLength = keySize
+                WrappingLength = keySize,
+                
             };
-            ctx.DrawText();
+            ctx.DrawText(textOptions, text, textColor.Value);
         });
 
         var pixelBytes = new byte[keySize * keySize * 4];
