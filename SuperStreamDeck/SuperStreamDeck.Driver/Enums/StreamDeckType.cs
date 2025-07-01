@@ -1,13 +1,23 @@
+using System.ComponentModel;
+
 namespace SuperStreamDeck.Driver.Enums;
 
-public enum StreamDeckType
+public enum StreamDeckType : byte
 {
-    OriginalStreamDeck = 0x0060,
-    OriginalStreamDeckV2 = 0x006d,
-    StreamDeckMini = 0x0063,
-    StreamDeckNeo = 0x009a,
-    StreamDeckXL = 0x006c,
-    StreamDeckMK2 = 0x0080,
-    StreamDeckPedal = 0x0086,
-    StreamDeckPlus = 0x0084,
+    [Description("Stream Deck")]
+    OriginalStreamDeck = 1,
+    [Description("Stream Deck V2")]
+    OriginalStreamDeckV2 = 2,
+    [Description("Stream Deck Mini")]
+    StreamDeckMini = 3,
+    [Description("Stream Deck Neo")]
+    StreamDeckNeo = 4,
+    [Description("Stream Deck XL")]
+    StreamDeckXL = 5,
+    [Description("Stream Deck MK2")]
+    StreamDeckMK2 = 6,
+    [Description("Stream Deck Pedal")]
+    StreamDeckPedal = 7,
+    [Description("Stream Deck Plus")]
+    StreamDeckPlus = 8,
 }
