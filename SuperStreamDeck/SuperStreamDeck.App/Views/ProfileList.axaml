@@ -9,21 +9,26 @@
     <Design.DataContext>
         <viewModels:ProfileListViewModel />
     </Design.DataContext>
-    <Grid RowDefinitions="Auto,*">
-        <Button Grid.Row="0" Command="{Binding AddProfile}">
-            <TextBlock Text="Add Profile" />
-        </Button>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Profiles}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
-                        <Button>
-                            <TextBlock Text="Remove" />
-                        </Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+        <Grid RowDefinitions="Auto,*">
+            <Button Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Command="{Binding AddProfile}">
+                <TextBlock Text="Add Profile" />
+            </Button>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Profiles}">
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="15"/>
+                    </Style>
+                </ListBox.Styles>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0, 0, 5, 0" Text="{Binding Name}" />
+                            <Button>
+                                <TextBlock Text="Remove" />
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
 </UserControl>

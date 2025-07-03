@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
+using CommunityToolkit.Mvvm.Input;
 using SuperStreamDeck.Driver.Enums;
 using SuperStreamDeck.Driver.Manager;
 using SuperStreamDeck.Driver.Models;
 
 namespace SuperStreamDeck.App.ViewModels;
 
-public class ProfileListViewModel : ViewModelBase
+public partial class ProfileListViewModel : ViewModelBase
 {
     private readonly IStreamDeckProfileManager _profileManager;
-    private Dictionary<Guid, Profile> _profiles = new();
+    private Dictionary<Guid, Profile> _profiles;
     public ProfileListViewModel(IStreamDeckProfileManager profileManager)
     {
         _profileManager = profileManager;
@@ -17,6 +18,7 @@ public class ProfileListViewModel : ViewModelBase
         _profileManager.ProfilesChanged += OnProfilesChanged;
     }
 
+    [RelayCommand]
     public void AddProfile()
     {
         _profileManager.AddProfile(new Profile("Test", StreamDeckType.OriginalStreamDeckV2, new Dictionary<int, KeySetting>()));
