@@ -9,9 +9,11 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="SuperStreamDeck.App">
-    <StackPanel>
-        
-    </StackPanel>
+    <Grid Background="Gray" ColumnDefinitions="3*,7" VerticalAlignment="Stretch">
+        <StackPanel Grid.Column="0" Orientation="Horizontal">
+            <views:ProfileList DataContext="{Binding ProfileListViewModel}"></views:ProfileList>
+        </StackPanel>
+    </Grid>
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->

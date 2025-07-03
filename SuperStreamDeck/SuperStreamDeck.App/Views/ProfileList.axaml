@@ -4,9 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:SuperStreamDeck.App.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             
-             x:Class="SuperStreamDeck.App.Views.ProfileList">
+             x:Class="SuperStreamDeck.App.Views.ProfileList"
+             x:DataType="viewModels:ProfileListViewModel">
     <Design.DataContext>
         <viewModels:ProfileListViewModel />
     </Design.DataContext>
+    <Grid RowDefinitions="Auto,*">
+        <Button Grid.Row="0" Command="{Binding AddProfile}">
+            <TextBlock Text="Add Profile" />
+        </Button>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Profiles}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <Button>
+                            <TextBlock Text="Remove" />
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

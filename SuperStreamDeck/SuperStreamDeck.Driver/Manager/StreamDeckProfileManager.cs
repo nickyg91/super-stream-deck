@@ -12,11 +12,9 @@ namespace SuperStreamDeck.Driver.Manager;
 public class StreamDeckProfileManager : IStreamDeckProfileManager
 {
     private readonly Dictionary<Guid, Profile> _profiles = new();
-    public List<Profile> GetProfiles()
-    {
-        return _profiles.Values.ToList();
-    }
+    public IReadOnlyDictionary<Guid, Profile> GetAllProfiles() => _profiles;
 
+    public event EventHandler? ProfilesChanged;
     public Profile? GetProfile(Guid id)
     {
         return _profiles.GetValueOrDefault(id);
@@ -25,6 +23,7 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
     public void AddProfile(Profile profile)
     {
         _profiles.Add(profile.Id, profile);
+        ProfilesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void UpdateProfile(Profile profile)
@@ -32,6 +31,7 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
         if (_profiles.ContainsKey(profile.Id))
         {
             _profiles[profile.Id] = profile;
+            ProfilesChanged?.Invoke(this, EventArgs.Empty);
         }
         else
         {
@@ -45,6 +45,7 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
         {
             throw new KeyNotFoundException($"Profile with ID {id} does not exist.");
         }
+        ProfilesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetDeckProfile(Profile profile, IMacroBoard streamDeck)

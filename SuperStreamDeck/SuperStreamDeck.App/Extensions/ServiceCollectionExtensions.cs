@@ -10,5 +10,6 @@ public static class ServiceCollectionExtensions
     {
         collection.AddSingleton<IStreamDeckProfileManager, StreamDeckProfileManager>();
         collection.AddTransient<MainWindowViewModel>();
+        collection.AddTransient<ProfileListViewModel>();
     }
 }
