@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="SuperStreamDeck.App/App.axaml" value="SuperStreamDeck.App/SuperStreamDeck.App.csproj" />
+        <entry key="SuperStreamDeck.App/Views/AddProfileDialog.axaml" value="SuperStreamDeck.App/SuperStreamDeck.App.csproj" />
         <entry key="SuperStreamDeck.App/Views/MainWindow.axaml" value="SuperStreamDeck.App/SuperStreamDeck.App.csproj" />
         <entry key="SuperStreamDeck.App/Views/ProfileList.axaml" value="SuperStreamDeck.App/SuperStreamDeck.App.csproj" />
         <entry key="SuperStreamDeck.App/Views/StreamDeckList.axaml" value="SuperStreamDeck.App/SuperStreamDeck.App.csproj" />

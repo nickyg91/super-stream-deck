@@ -1,0 +1,57 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:SuperStreamDeck.App.ViewModels"
+        xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SuperStreamDeck.App.Views.AddProfileDialog"
+        x:DataType="viewModels:AddProfileViewModel"
+        Title="Add Profile"
+        TransparencyLevelHint="AcrylicBlur"
+        ExtendClientAreaToDecorationsHint="True"
+        WindowStartupLocation="CenterScreen"
+        Width="450" Height="250">
+    <Design.DataContext>
+        <viewModels:AddProfileViewModel />
+    </Design.DataContext>
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.65" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Panel Margin="40">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Margin="20">
+                    <TextBlock Margin="0,5">Profile Name</TextBlock>
+                    <TextBox Text="{Binding Name}"></TextBox>
+                    <TextBlock Margin="0, 5">Stream Deck Type</TextBlock>
+                    <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding StreamDeckTypes}" SelectedValue="{Binding StreamDeckType}"
+                              SelectedValueBinding="{Binding Value}"
+                              DisplayMemberBinding="{Binding Description}">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0, 20, 0, 0">
+                    <Button Command="{Binding SaveProfile}" Margin="0, 0, 5, 0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <avalonia:Icon Value="fa-solid fa-check" Margin="0,0,5,0"></avalonia:Icon>
+                            <TextBlock>Save</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding Cancel}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <avalonia:Icon Value="fa-solid fa-times" Margin="0,0,5,0"></avalonia:Icon>
+                            <TextBlock>Cancel</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Panel>
+    </Panel>
+</Window>

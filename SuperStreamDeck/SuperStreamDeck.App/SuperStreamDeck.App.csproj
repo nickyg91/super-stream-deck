@@ -31,5 +31,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SuperStreamDeck.Driver\SuperStreamDeck.Driver.csproj" />
+      <ProjectReference Include="..\SuperStreamDeck.Model\SuperStreamDeck.Model.csproj" />
     </ItemGroup>
 </Project>
