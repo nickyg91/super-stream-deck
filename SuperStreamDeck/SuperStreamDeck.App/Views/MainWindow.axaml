@@ -22,10 +22,10 @@
                     MaterialOpacity="0.65" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-        <Grid ColumnDefinitions="25*, 75*" VerticalAlignment="Stretch">
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
+        <Grid ColumnDefinitions="25*, 75*" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="True">
+            <DockPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <views:ProfileList DataContext="{Binding ProfileListViewModel}"></views:ProfileList>
-            </StackPanel>
+            </DockPanel>
         </Grid>
     </Panel>
     
