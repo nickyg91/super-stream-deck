@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using SuperStreamDeck.App.Messages;
 using SuperStreamDeck.Driver.Manager;
 using SuperStreamDeck.Driver.Models;
 
@@ -23,12 +21,12 @@ public partial class ProfileListViewModel : ViewModelBase
     [RelayCommand]
     public async Task AddProfile()
     {
-        var profile =  await WeakReferenceMessenger.Default.Send<AddProfileDialogOpenedMessage>().Response;
-        if (profile is not null)
-        {
-            _profileManager.AddProfile(new Profile(profile.Name, profile.StreamDeckType!.Value, new Dictionary<int, KeySetting>()));
-            OnProfilesChanged(this, EventArgs.Empty);
-        }
+        // var profile =  await WeakReferenceMessenger.Default.Send<AddProfileDialogOpenedMessage>().Response;
+        // if (profile is not null)
+        // {
+        //     _profileManager.AddProfile(new Profile(profile.Name, profile.StreamDeckType!.Value, new Dictionary<int, KeySetting>()));
+        //     OnProfilesChanged(this, EventArgs.Empty);
+        // }
     }
     
     public IEnumerable<Profile> Profiles => _profiles.Values;

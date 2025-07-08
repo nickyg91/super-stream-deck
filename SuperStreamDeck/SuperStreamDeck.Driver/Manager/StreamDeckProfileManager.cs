@@ -48,14 +48,14 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
         ProfilesChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void SetDeckProfile(Profile profile, IMacroBoard streamDeck)
+    public void SetDeckProfile(Profile profile)
     {
-        if (!streamDeck.IsConnected)
+        if (!profile.Device.Open(true).IsConnected)
         {
             throw new Exception("StreamDeck is not connected.");
         }
 
-        streamDeck.ClearKeys();
+        profile.ClearKeys();
         for (int i = 0; i < streamDeck.Keys.Count; i++)
         {
             if (!profile.Keys.TryGetValue(i, out var keySetting))
