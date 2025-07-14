@@ -33,23 +33,23 @@ public class Profile(
         _macroBoard.ClearKeys();
     }
     
-    public void SetKey(int keyIndex, KeySetting keySetting)
-    {
-        if (_macroBoard is null || !_macroBoard.IsConnected)
-        {
-            throw new Exception("StreamDeck is not connected.");
-        }
-        _macroBoard.SetKeyBitmap(keyIndex, keySetting.BackgroundImage);
-        _macroBoard.SetKeyText(keyIndex, keySetting.Text);
-        if (keySetting.Event is not null)
-        {
-            _macroBoard.KeyStateChanged += (s, e) =>
-            {
-                if (e.KeyNumber == keyIndex && e.IsDown)
-                {
-                    keySetting.Event.Invoke(this, EventArgs.Empty);
-                }
-            };
-        }
-    }
+    // public void SetKey(int keyIndex, KeySetting keySetting)
+    // {
+    //     if (_macroBoard is null || !_macroBoard.IsConnected)
+    //     {
+    //         throw new Exception("StreamDeck is not connected.");
+    //     }
+    //     _macroBoard.SetKeyBitmap(keyIndex, keySetting.BackgroundImage);
+    //     _macroBoard.(keyIndex, keySetting.Text);
+    //     if (keySetting.Event is not null)
+    //     {
+    //         _macroBoard.KeyStateChanged += (s, e) =>
+    //         {
+    //             if (e.KeyNumber == keyIndex && e.IsDown)
+    //             {
+    //                 keySetting.Event.Invoke(this, EventArgs.Empty);
+    //             }
+    //         };
+    //     }
+    // }
 }

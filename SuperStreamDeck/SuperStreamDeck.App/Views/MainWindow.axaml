@@ -24,7 +24,10 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         <Grid ColumnDefinitions="25*, 75*" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="True">
-            <DockPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DockPanel HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <views:StreamDeckList DataContext="{Binding StreamDeckListViewModel}"></views:StreamDeckList>
+            </DockPanel>
+            <DockPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <views:ProfileList DataContext="{Binding ProfileListViewModel}"></views:ProfileList>
             </DockPanel>
         </Grid>

@@ -1,13 +1,14 @@
 using OpenMacroBoard.SDK;
-using SixLabors.ImageSharp.PixelFormats;
-using SuperStreamDeck.Driver.Models;
-using SixLabors.ImageSharp;
 using SixLabors.Fonts;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SuperStreamDeck.Driver.Manager;
+using SuperStreamDeck.Driver.Models;
 using PointF = SixLabors.ImageSharp.PointF;
 
-namespace SuperStreamDeck.Driver.Manager;
+namespace SuperStreamDeck.Driver.Managers;
 
 public class StreamDeckProfileManager : IStreamDeckProfileManager
 {
@@ -50,26 +51,26 @@ public class StreamDeckProfileManager : IStreamDeckProfileManager
 
     public void SetDeckProfile(Profile profile)
     {
-        if (!profile.Device.Open(true).IsConnected)
-        {
-            throw new Exception("StreamDeck is not connected.");
-        }
-
-        profile.ClearKeys();
-        for (int i = 0; i < streamDeck.Keys.Count; i++)
-        {
-            if (!profile.Keys.TryGetValue(i, out var keySetting))
-            {
-                continue;
-            }
-
-            if (string.IsNullOrEmpty(keySetting.Text))
-            {
-                continue;
-            }
-            var bmp = CreateKeyBitmapFromText(keySetting.Text);
-            streamDeck.SetKeyBitmap(bmp);
-        }
+        // if (!profile.Device.Open(true).IsConnected)
+        // {
+        //     throw new Exception("StreamDeck is not connected.");
+        // }
+        //
+        // profile.ClearKeys();
+        // for (int i = 0; i < streamDeck.Keys.Count; i++)
+        // {
+        //     if (!profile.Keys.TryGetValue(i, out var keySetting))
+        //     {
+        //         continue;
+        //     }
+        //
+        //     if (string.IsNullOrEmpty(keySetting.Text))
+        //     {
+        //         continue;
+        //     }
+        //     var bmp = CreateKeyBitmapFromText(keySetting.Text);
+        //     streamDeck.SetKeyBitmap(bmp);
+        // }
     }
 
     private KeyBitmap CreateKeyBitmapFromText(
